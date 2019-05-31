@@ -2,8 +2,12 @@
 <%= @task.id %>
 のメッセージ詳細ページ</h1>
 
-<p>
-  <%= @task.content %>
+<P>状態:
+<%= @task.status %>
+</P>
+
+<p>タスク:
+<%= @task.content %>
 </p>
 
 <%= link_to "一覧に戻る", tasks_path %>
