@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
-  root to: "tasks#index"
+  get 'toppages/index'
+  root to: "toppages#index"
   resources :tasks
 end
