@@ -1,7 +1,7 @@
 class ToppagesController < ApplicationController
   def index
     if logged_in?
-      @tasks =Task.all
+      @tasks = current_user.tasks.order(id: :desc).page(params[:page])
     end
   end
 end

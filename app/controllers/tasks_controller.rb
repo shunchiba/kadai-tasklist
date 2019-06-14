@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show]
+  before_action :require_user_logged_in
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   
   def index
@@ -9,15 +9,15 @@ class TasksController < ApplicationController
   end
   
   def new
-    @task = Task.new
+    @tasks = current_user.tasks.new
   end
   
   def create
-    @task = Task.new(task_params)
+    @tasks = current_user.tasks.new(task_params)
     
-    if @task.save
+    if @tasks.save
       flash[:success] = "タスク が正常に保存されました"
-      redirect_to @task
+      redirect_to root_url
     else
       flash.now[:danger] = "タスク が保存されませんでした"
       render :new
@@ -41,7 +41,7 @@ class TasksController < ApplicationController
     @task.destroy
     
     flash[:success] = "タスク は正常に削除されました"
-    redirect_to tasks_url
+    redirect_to root_url
   end
   
   private
